@@ -1,0 +1,47 @@
+30.1 qual é a arquitetura do databricks?
+processamento distribuido e armazenamento distribuido
+
+30.2 o que dbfs
+databricks file system
+
+30.3 o que é o databricks?
+Uma plataforma aberta destinada para armazenar e gerenciar todos os seus dados para todas as suas cargas de dados
+.. - O Azure Databricks é uma plataforma unificada de open analytics para criar, implantar, compartilhar e manter soluções de dados de nível empresarial, analytics e IA em escala. A Plataforma Azure Databricks Lakehouse integra-se ao armazenamento em nuvem e à segurança em sua conta de nuvem e gerencia e implanta a infraestrutura de nuvem em seu nome.
+
+
+30.4 como é dividida a platoaforma do databricks?
+notebooks, analytics, delta lake, machine learning
+
+30.5 o que é o delta lake?
+Permite que sejam combinados os diversos tipos de dados inseridos no Databricks, pra que ajustes, tratamentos nos dados possam ser executados
+..- Delta Lake is an open-source storage framework that enables building a
+Lakehouse architecture with compute engines including Spark, PrestoDB, Flink, Trino, and Hive and APIs for Scala, Java, Rust, and Python.
+
+30.6 A arquitetura da plataforma Azure Databricks é composta por duas partes principais, quais são?
+A infraestrutura usada pelo Azure Databricks para implantar, configurar e gerenciar a plataforma e os serviços.
+A infraestrutura de propriedade do cliente gerenciada em colaboração pelo Azure Databricks e sua empresa.
+
+30.7 como funciona a migração de dados corporativos para AD?
+..- o Azure Databricks não força você a migrar seus dados para sistemas de armazenamento proprietários para uso da plataforma
+você configura um workspace do Azure Databricks configurando integrações seguras entre a plataforma do Azure Databricks e a conta de nuvem e, em seguida, o Azure Databricks implanta clusters de computação usando recursos de nuvem na conta para processar e armazenar dados no armazenamento de objetos e outros serviços integrados controlados por você
+
+
+30.8 como funciona o catalogo Unity em relação aos dados corporativos?
+..- Estende ainda mais essa relação, permitindo que você gerencie permissões para acessar dados usando a sintaxe SQL familiar no Azure Databricks.
+
+30.9 o que é o delta live tables?
+..- simplifica ainda mais o ETL, gerenciando de forma inteligente as dependências entre conjuntos de dados e implantando e dimensionando automaticamente a infraestrutura de produção para garantir a entrega oportuna e precisa dos dados de acordo com suas especificações
+
+35.1 o que DBU?
+databricks unity - is a unit processing capability per hour
+
+35.2 como faço para acessar um arquivo do FileStore?
+spark.read.load("/dbfs/FileStore/dados/iris.csv")
+
+--featurestore
+
+35.3 como é chamado no databricks quando dados brutos exigem pré-processamento e transformação antes que possam ser usados para criar um modelo.
+engenharia de recursos
+
+35.4 como sao chamadas as saidas de engenharia de recursos?
+recursos. os blocos de construção do modelo.
