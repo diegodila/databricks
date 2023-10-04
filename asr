@@ -8,8 +8,7 @@ databricks file system
 Uma plataforma aberta destinada para armazenar e gerenciar todos os seus dados para todas as suas cargas de dados
 .. - O Azure Databricks é uma plataforma unificada de open analytics para criar, implantar, compartilhar e manter soluções de dados de nível empresarial, analytics e IA em escala. A Plataforma Azure Databricks Lakehouse integra-se ao armazenamento em nuvem e à segurança em sua conta de nuvem e gerencia e implanta a infraestrutura de nuvem em seu nome.
 
-
-30.4 como é dividida a platoaforma do databricks?
+30.4 como é dividida a plataforma do databricks?
 notebooks, analytics, delta lake, machine learning
 
 30.5 o que é o delta lake?
@@ -24,7 +23,6 @@ A infraestrutura de propriedade do cliente gerenciada em colaboração pelo Azur
 30.7 como funciona a migração de dados corporativos para AD?
 ..- o Azure Databricks não força você a migrar seus dados para sistemas de armazenamento proprietários para uso da plataforma
 você configura um workspace do Azure Databricks configurando integrações seguras entre a plataforma do Azure Databricks e a conta de nuvem e, em seguida, o Azure Databricks implanta clusters de computação usando recursos de nuvem na conta para processar e armazenar dados no armazenamento de objetos e outros serviços integrados controlados por você
-
 
 30.8 como funciona o catalogo Unity em relação aos dados corporativos?
 ..- Estende ainda mais essa relação, permitindo que você gerencie permissões para acessar dados usando a sintaxe SQL familiar no Azure Databricks.
@@ -45,3 +43,28 @@ engenharia de recursos
 
 35.4 como sao chamadas as saidas de engenharia de recursos?
 recursos. os blocos de construção do modelo.
+
+36.1 what are data life cycle in databricks?
+bronze layer - raw ingestion, silver layer - (filtered, cleaned e augmented) - gold layer (bussiness-level aggregates)
+
+36.2 What are the characteristic of the bronze layer in delta architecture
+data lake - repository of raw data without schema enforcement
+raw ingestion - raw data from multiple sources, long data retention
+avoid error-prone parsing
+
+36.3 what are the characteristic of the silver layer
+apache spark data processing - (distributed cluster-computing framework - optimized for memory computation) filtered, cleaned and augmented 
+intermediate data with cleanup queryable for easy debugging
+
+36.4 which engine is spark, computing ou storage?
+computing - data processing
+
+36.5 what are the characteristic of the gold layer in delta architecture?
+dw and olap - (analytics platform for enterprises - scalability - horizontally vs vertically) - bussiness-level aggregates
+clean data, ready for consumption, dw-style (dimensions and fact)
+apache hive and presto connectors
+ 
+---------------------------------------------------------------------------------------------------------------------------
+Implementação do databricks
+
+devemos criar um workspace com a featurestore?
