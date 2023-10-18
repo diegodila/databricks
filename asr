@@ -44,7 +44,9 @@ engenharia de recursos
 35.4 como sao chamadas as saidas de engenharia de recursos?
 recursos. os blocos de construção do modelo.
 
-36.1 what are data life cycle in databricks?
+--delta lake
+
+36.1 what are data life cycle in databricks delta architecture?
 bronze layer - raw ingestion, silver layer - (filtered, cleaned e augmented) - gold layer (bussiness-level aggregates)
 
 36.2 What are the characteristic of the bronze layer in delta architecture
@@ -63,7 +65,41 @@ computing - data processing
 dw and olap - (analytics platform for enterprises - scalability - horizontally vs vertically) - bussiness-level aggregates
 clean data, ready for consumption, dw-style (dimensions and fact)
 apache hive and presto connectors
- 
+
+36.6 Can we bring several bronze tables to increase a silver table?
+yes
+
+36.7 Is ACID a feature the delta lake?
+yes
+
+36.8 what does ACID mean?
+Atomicity, Consistency, Isolation, and Durability
+
+37.8 how does delta lake writing work?
+You can write data concurrently with integrity using something similar to the relational database, which is the transaction log
+
+37.9 Within the delta lake framework, what writing models do I have?
+optimistic concurrency model, where recordings are taking place and they are versioned and where we can guarantee transactions within a subsystem that is a storage
+
+37.10 When I'm writing on a gigantic scale, what does Delta Lake use to scale the metadata?
+it uses the power of the spark cluster to have scalable metadata
+
+37.11 What is the possibility of returning an insert in delta lake called?
+time travel - makes it possible to go back in time
+
+37.12 Why is time travel in Delta Lake important?
+for auditing, rollback, chat finger and reproducing machine learning experiments
+
+37.13 What is schema evolution in delta lake?
+maintains the current functionality of the data in the face of a change - if there is a change in the data source and a new column, your process does not break in the delta
+
+37.14 What is audit history in delta lake?
+stores all information for future audits
+
+37.15 What is delete, update and merge statement in delta lake?
+working with incremental data involves cdc and many insert, update and delete features and the merge statement feature is nothing more than if the data exists you update it if it doesn't exist you insert it 
+
+
 ---------------------------------------------------------------------------------------------------------------------------
 Implementação do databricks
 
