@@ -97,10 +97,37 @@ maintains the current functionality of the data in the face of a change - if the
 stores all information for future audits
 
 37.15 What is delete, update and merge statement in delta lake?
-working with incremental data involves cdc and many insert, update and delete features and the merge statement feature is nothing more than if the data exists you update it if it doesn't exist you insert it 
+working with incremental data involves cdc and many insert, update and delete features and the merge statement feature is nothing more than if the data exists you update it if it doesn't exist you insert it  
 
 
 ---------------------------------------------------------------------------------------------------------------------------
 Implementação do databricks
 
 devemos criar um workspace com a featurestore?
+
+
+
+Documentação sobre como levar o processo de trabalho atualmente desenvolvido para a BB Features.
+
+Atualmente nós desenvolvemos as features na plataforma seguindo o template das classes com os métodos. Após a finalização do desenvolvimento, é feito merge request onde são efetuadas algumas validações automatizadas. O usuário precisa instalar a biblioteca usando uma virtual env, importá-la, e usar os métodos para obter as features.
+Então, pretende-se entender como criar um processo análogo ao que desenvolvemos atualmente utilizando as funcionalidades e possibilidades do Databricks, incluindo a possibilidade de utilização da ferramenta própria de feature store para persistir os dados. Então, o entregável final do estudo seria um material (apresentação) com esse passo a passo, incluindo:
+
+- Como acessar e utilizar as bases corporativas no ambiente do DataBricks (como está funcionando processo de solicitar replicação das bases, onde visualizar as tabelas, metadados etc.)
+- Desenvolvimento das features (códigos e/ou funcionalidades no-code) a partir das bases corporativas (acessar notebook, criar cluster para processamento etc.)
+- Estruturação de pipeline de teste, validação, aprovação etc. de features (equivalente ao que fazemos na hora do merge request, porém utilizando as funcionalidades disponíveis no DataBricks)
+- Persistência (salvamento) dos dados das features para acesso posterior, para que não seja necessário realizar o processamento da feature novamente na hora da utilização pelo usuário.
+- Registro dos metadados (tipo, periodicidade, descrição, documentação e outras informações úteis) das features
+- Funcionamento geral do catálogo de features (funcionalidade de consulta de features e seus metadados pelo usuário)
+- Estruturação da pipeline de atualização do código (regra de construção) de feature já existente (versionamento, validação, aprovação etc.)
+- Atualização do conteúdo (inclusão de novos dados) em feature já existente e persistida (isso inclui atualização dos dados persistidos, quando for o caso)
+- Controle de acesso às features (garantir que o usuário não possa acessar a feature persistida caso ele não tenha acesso a alguma das tabelas necessárias para a construção da mesma)
+- Utilização da feature pronta por um usuário que, por exemplo, está desenvolvendo um modelo preditivo
+
+Sugere-se simular um processo de construção, disponibilização e utilização de feature de “ponta a ponta” passando por todos esses passos elencados. São bem vindas a demonstração de outras funcionalidades do Databricks não elencadas nos tópicos acima mas que possam ser úteis ou melhorar o processo de desenvolvimento e utilização das features.
+
+
+------------------------------------------------------------------------------------------------------------------
+- log de quem acessou a feature
+- base de dados é hive ou db2? (pergunta frequente)
+- conseguimos filtrar dados na chamada da feature?
+- tabelas particionadas?

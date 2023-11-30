@@ -1,0 +1,9 @@
+Primeiro acesso ao Azure Databricks
+	Acessar na guia anônima: https://adb-5656040653123639.19.azuredatabricks.net
+	
+	O login e senha é:
+	<sua-chave>@interno.bb.com.br
+	<senha-rede-man> - (senha para entrar na vdi)
+	
+	Ele pedirá a instalação do Microsoft Authenticator no celular 
+	Receba o código de verificação e o login será concluido
