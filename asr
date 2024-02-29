@@ -97,7 +97,18 @@ maintains the current functionality of the data in the face of a change - if the
 stores all information for future audits
 
 37.15 What is delete, update and merge statement in delta lake?
-working with incremental data involves cdc and many insert, update and delete features and the merge statement feature is nothing more than if the data exists you update it if it doesn't exist you insert it  
+working with incremental data involves cdc and many insert, update and delete features and the merge statement feature is nothing more than if the data exists you update it if it doesn't exist you insert it
+
+38.1 what are key features of a data lakehouse?
+- transaction support
+- schema enforcement and governance
+- data governance
+- bi support
+- decloupled storage from compute
+- open storage formats 
+- support for diverse data types
+- support for diverse workloads 
+- end-to-end streaming
 
 
 ---------------------------------------------------------------------------------------------------------------------------

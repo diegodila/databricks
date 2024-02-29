@@ -1,0 +1,9 @@
+CLOUD FILES
+AUTO LOADER?
+INGESTAO DE DADOS CONTINUA OU AGENDADA
+STREAMING LIVE TABLE
+SQL STREAM()
+vacum sql 
+optimize sql
+
+https://www.dbdemos.ai/index.html
