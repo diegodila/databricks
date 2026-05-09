@@ -110,6 +110,155 @@ working with incremental data involves cdc and many insert, update and delete fe
 - support for diverse workloads 
 - end-to-end streaming
 
+01.1 qual o metodo unificado de governança do databricks?
+unity catalog
+
+1.2 o que é o unity catalog oferece?
+access control, auditing, data lineage, quality monitoring, and data discovery
+
+1.3 o que é o lakeflow do databricks?
+é uma unified plataform for data ingestion, transformation and orchestration.
+
+1.4 quais os componentes do lakeflow?
+lakeflow connect, lakeflow declarative pipelines, lakeflow jobs
+
+1.5 o que é lakeflow connect?
+a set of efficient ingestion connectors that simplify data ingestion from popular enterprise applications, databases, cloud storage, message buses, and local files
+
+1.6 o que é lakeflow declarative pipelines?
+a framework for building batch and streaming data pipelines using sql and python, designed to accelerate etl development
+
+1.7 o que é lakeflow jobs?
+a workflow automation tool for databricks that orchestrates data processing workloads. It enables coordination of multiple tasks within complex workflows, allowing for the scheduling, optimization, and management of repeatable processes.
+
+1.8 quais sao os beneficios do lakeflow connect?
+a managed and efficient solution that reduces costs and accelarates time to value, self-service interfaces that enable practitioner across the organization to easily ingest data from enterprise application, unified obsevability and governance to ensure secure, reliable, and well-monitored pipelines and tables.
+
+1.9 quais os 3 tipos de conectores de ingestao que o lakeflow connect da suporte?
+manual file uploads, standard connectors(cloud object storage, Kafka), managed connectors(from enterprise applications (SaaS, databases))
+
+1.10 quais os tipos de ingestao do lakeflow connect?
+batch - load data as batches of rows into databricks, often based on a schedule
+incremental batch - only new data is ingested, previoly loaded records are skipped automatically
+streaming - continuosly load data rows or batches of data rows as it is generated so you can query it as it arrives in near real-time 
+micro-batch process small batches a very short, frequent intervals
+
+1.11 o que o delta lake entrega?
+delta lake delivers open, reliable, and scalable data management for the lakehouse, empowering you to ingest data from external sources and efficiently manage it across bronze(raw), silver(cleaned), and gold(curated) layers - all with full ACID transactions, time travel, schema enforcement, and support for both batch and streaming workloads.
+
+1.12 como o delta lake trabalha para ingerir dados da cloud?
+delta lake is simply an open-source protocol for reading and writing files to cloud storage. Delta table offer an open table format that supports the lakehouse architecture
+
+1.13 alem de armazenar em um diretorio como parquet, como a delta table armazena as transações das tabelas e dados?
+Within the directory, data is stored as parquet files, and what delta adds is delta logs stored as JSON files  alongside the parquet files. the delta logs keep track of all of the transactions on the data (parquet files) and table versions
+
+1.14 quais sao as key features do delta lake?
+ACID transactions, data manipulation language, time travel, schema evolution and enforcement
+
+1.15 o que é ACID in delta lake?
+ACID transactions  (Atomicity, Consistency, Isolation, and Durability) for all operation, allowing multiple users to read and write data concurretly without conflicts.
+
+1.16 qual é o suporte do delta lake para DML?
+supports Data manipulation Language (DML) operations such as INSERT, UPDATE, DELETE, and MERGE, enabling flexible data management.
+
+1.17 o que é o time travel permite?
+Time travel allows users to query  and revert to previous versions of data, facilitating auditing and recovery.
+
+1.18 o que o schema evolution permite?
+Enforces a defined schema for data integrity while allowing schema evolution, enabling changes to the structure without breaking existing workflows. 
+
+1.19 o que é camada bronze na ingestao de dados do databricks?
+It begins with the Broze layers, the raw data ingestion layer. This layers ingests raw, unprocessed data from various sources 'as is', serving as the foundational storage for all data.
+
+1.20 o que é camada silver do databricks?
+in silver layer, the data is cleaned, transformed, and enriched, proving a more refined dataset that is suitable for analysis.
+
+1.21 o que é camada gold do databricks?
+Lastly the gold layer contains curated, aggregated, and high-quality data, optimized for reporting and advanced analytics, often used for business intelligence applications 
+
+data ingestion from cloud storage
+
+2.01 quais sao 3 metodos de ingesting files from cloud object storage into delta tables?
+CREATE TABLE AS (CTAS), COPY INTO, Auto Loader
+ingestion from cloud object storage is perfomed using lakeflow connect standard connectors
+
+2.02 como criar uma tabela a partir de um cloud object storage?
+CREATE TABLE new_table AS
+SELECT *
+FROM read_files(
+    <path_to_files(s)>,
+    format => '<file_type>',
+    <other_format_specific_options>
+); 
+
+2.03 o que faz a funça read_files() na criaçao de uma tabela delta table a partir de um cloud object storage?
+the read_files() function reads files under a provided location and returns the data in tabular form, automatically detects the file format and infers a unified schema across all files.
+
+2.04 quais sao os formatos aceitos dentro da função read_files()?
+json, csv, xml, text, binaryfile, parquet, avro and orc
+
+2.05 como criar uma tabela a partir de um cloud object storage usando o COPY INTO (legacy)?
+#you can create an empty table without a schema
+#you also can explicitly create the table with a schema
+CREATE TABLE new_table; 
+
+COPY INTO new_table
+FROM '<dir_path>'
+FILEFORMAT=<file_type>
+FORMAT_OPTIONS(<options>)
+COPY_OPTIONS(<options>)
+
+2.06 para que o copy into é ideal? 
+COPY INTO is ideal for situations where the cloud storage location is continuosly adding file, since it is a retriable and indempotent operation designed for incremental batch ingestion
+
+2.07 como funciona o COPY INTO em isercoes de dados incrementais?
+COPY INTO will skip any files that have already been loaded into the table, and only new files will be ingested.
+
+2.08 quais tipo de arquivos o COPY INTO suporta?
+It supports various common file types like parquet, JSON, XML and others.
+
+2.09 o que faz o FROM no COPY INTO?
+the FROM clause specifies the path of the cloud storage location where new files are being continuosly added.
+
+2.10 o que faz o FORMAT_OPTIONS() no COPY INTO?
+controls how the source files are parsed and interpreted, and the available options will depend on the file format you're working with.
+
+2.11 o que faz o COPY_OPTIONS() no COPY INTO?
+COPY_OPTIONS() let you control the behavior of the COPY INTO operation itself. For example, options like schema evolution using mergeSchema, or idempotency using force. 
+
+2.12 quais linguagem o auto loader tem suporte?
+python and sql
+
+2.13 em casos de uso qual é o melhor metodo de ingestion type para processar milhoes de files? Auto loader, create table as, copy into?
+auto loader
+
+2.14 sobre qual tecnologia o auto loader é construido?
+spark structured streaming
+
+2.15 o que é o auto loader e quais beneficios ele contem?
+auto loader incrementally and efficiently processes new data files in either in batch or streaming mode as they arrive in cloud storage, and it does this without any additional setup. You can also use Auto loader, which is a feature that automatically detects and ingests new files from cloud storage into delta lake table, simplifying the process of handling incrmental or streming data with minimal configuration.
+
+2.16 com fazemos um incremental data ingestion com python auto loader?
+spark
+.readStrem
+    .format("cloudFiles")
+    .option("cloudFiles.format", "json")
+    .option("cloudFiles.schemaLocation", "<checkpoint_path>")
+    .load("/Volumes/catalog/schema/files")
+.writeStream
+    .option("checkpointLocation", "<checkpoint_path>")
+    .trigger(processingTime="5 seconds")
+    .toTable("catalog.database.table")
+
+2.17 o que faz o .load() quando usamos o auto loader?
+we use .load() to point to the location of the files, in this case a path under /Volumes referencing Unity Catalog.
+
+2.18 quando estamos usando o .writeStrem como fazemos para saber o estado e progresso, e ter um intervalo de escrita?
+we configure .writeStrem  with a checkpoint location to maintain state and progress and set a trigger .trigger() interval of every 5 seconds.
+
+2.19 o que faz o .toTabel() no autoLoader?
+we use .toTable() to write the data into a delta table specified by catalog, database, and table name.
+
 
 ---------------------------------------------------------------------------------------------------------------------------
 Implementação do databricks
