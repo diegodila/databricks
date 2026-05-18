@@ -139,7 +139,7 @@ manual file uploads, standard connectors(cloud object storage, Kafka), managed c
 
 1.10 quais os tipos de ingestao do lakeflow connect?
 batch - load data as batches of rows into databricks, often based on a schedule
-incremental batch - only new data is ingested, previoly loaded records are skipped automatically
+incremental batch - only new data is ingested, previosly loaded records are skipped automatically
 streaming - continuosly load data rows or batches of data rows as it is generated so you can query it as it arrives in near real-time 
 micro-batch process small batches a very short, frequent intervals
 
@@ -162,13 +162,13 @@ ACID transactions  (Atomicity, Consistency, Isolation, and Durability) for all o
 supports Data manipulation Language (DML) operations such as INSERT, UPDATE, DELETE, and MERGE, enabling flexible data management.
 
 1.17 o que é o time travel permite?
-Time travel allows users to query  and revert to previous versions of data, facilitating auditing and recovery.
+Time travel allows users to query and revert to previous versions of data, facilitating auditing and recovery.
 
 1.18 o que o schema evolution permite?
 Enforces a defined schema for data integrity while allowing schema evolution, enabling changes to the structure without breaking existing workflows. 
 
 1.19 o que é camada bronze na ingestao de dados do databricks?
-It begins with the Broze layers, the raw data ingestion layer. This layers ingests raw, unprocessed data from various sources 'as is', serving as the foundational storage for all data.
+It begins with the Bronze layers, the raw data ingestion layer. This layers ingests raw, unprocessed data from various sources 'as is', serving as the foundational storage for all data.
 
 1.20 o que é camada silver do databricks?
 in silver layer, the data is cleaned, transformed, and enriched, proving a more refined dataset that is suitable for analysis.
@@ -191,7 +191,7 @@ FROM read_files(
     <other_format_specific_options>
 ); 
 
-2.03 o que faz a funça read_files() na criaçao de uma tabela delta table a partir de um cloud object storage?
+2.03 o que faz a funçao read_files() na criaçao de uma tabela delta table a partir de um cloud object storage?
 the read_files() function reads files under a provided location and returns the data in tabular form, automatically detects the file format and infers a unified schema across all files.
 
 2.04 quais sao os formatos aceitos dentro da função read_files()?
@@ -236,7 +236,7 @@ auto loader
 spark structured streaming
 
 2.15 o que é o auto loader e quais beneficios ele contem?
-auto loader incrementally and efficiently processes new data files in either in batch or streaming mode as they arrive in cloud storage, and it does this without any additional setup. You can also use Auto loader, which is a feature that automatically detects and ingests new files from cloud storage into delta lake table, simplifying the process of handling incrmental or streming data with minimal configuration.
+auto loader incrementally and efficiently processes new data files in either in batch or streaming mode as they arrive in cloud storage, and it does this without any additional setup. You can also use Auto loader, which is a feature that automatically detects and ingests new files from cloud storage into delta lake table, simplifying the process of handling incrmental or streaming data with minimal configuration.
 
 2.16 com fazemos um incremental data ingestion com python auto loader?
 spark
@@ -253,13 +253,49 @@ spark
 2.17 o que faz o .load() quando usamos o auto loader?
 we use .load() to point to the location of the files, in this case a path under /Volumes referencing Unity Catalog.
 
-2.18 quando estamos usando o .writeStrem como fazemos para saber o estado e progresso, e ter um intervalo de escrita?
+2.18 quando estamos usando o .writeStream como fazemos para saber o estado e progresso, e ter um intervalo de escrita?
 we configure .writeStrem  with a checkpoint location to maintain state and progress and set a trigger .trigger() interval of every 5 seconds.
 
-2.19 o que faz o .toTabel() no autoLoader?
+2.19 o que faz o .toTable() no autoLoader?
 we use .toTable() to write the data into a delta table specified by catalog, database, and table name.
 
+2.20 para ingest data o que o databricks recomenda?
+databricks recommends using streaming tables to ingest data with databricks SQL(instead of COPY INTO). A streaming table is a table registered to Unity Catalog that includes additional support for streaming or incremental data processing.
 
+2.21 o que acontece quando criamos uma streaming table?
+when you create a streaming table, a pipeline is automatically generated for it.
+
+2.22 o que databricks recomenda for most data ingestion tasks from cloud object storage?
+Databricks recommends using Auto Loader with Lakeflow Declarative Pipelines for most data ingestion tasks from cloud object storage. Together, Auto Loader and Declarative Pipelines are designed to incrementallyand indempotently load continuosly growing datasets as they arrive.
+
+2.23 como é um script para ingestao de dados com auto loader with sql (declarative pipelines)?
+
+CREATE OR REFRESH STREAMING TABLE
+catalog.schema.table SCHEDULE EVERY 1 HOUR
+AS
+SELECT *
+FROM STREAM read_files(
+    '<dir_path>'
+    format => '<file_type>'
+)
+
+2.24 o que o workspace precisa para suportar serveless Lakeflow streaming tables?
+streaming tables in Databricks SQL are backed by serveless Lakeflow Declarative Pipelines. Your workspace must support serveless pipelines to use this functionality.
+
+3.01 como ver o default catalog e default schema no databricks?
+SELECT current_catalog(), current_schema()
+
+3.02 o default catalog e default schema ja sao pre configurados?
+sim
+
+3.03 como listar volumes?
+LIST "<VOL-PATH>
+
+3.04 Na UI onde os volumes ficam? 
+in delta shares received
+
+3.05 como fazemos uma query em um arquivo parquet que esta armazenado no volume?
+SELECT * FROM parquet."<VOL-PATH-directory-PARQUET> 
 ---------------------------------------------------------------------------------------------------------------------------
 Implementação do databricks
 
