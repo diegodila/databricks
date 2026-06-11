@@ -1,0 +1,75 @@
+1.1 qual o fluxo de criação do modelo?
+prep e criacao de features (etl + eda, feature engineering)
+feature store
+desenvolvimento do modelo
+tracking com mlflow
+promover o modelo para o uso produtivo(anotar metricas do modelo, seguir com o deploy) (staging request- model registry)
+aprovar/rejeitar solicitacao - promoveer o melhor modelo para o ambiente de producao - move to staging - depois staging
+rodar inferencias - carregar o modelo 
+agendar o retreino - databricks job
+
+1.2 quando estamos trabalhando com os dados para treinar o modelo como fazemos a divisao?
+divimos em treino geralmente 70% que o modelo de ML vai aprender com os dados, e teste 30%
+aplicamos a metrica de rmse 
+
+1.3 porque nao podemos atribuir valores numericos a cada uma das categorias?
+cao = 1, gato = 2, peixe = 3
+o modelo entende que 1 gato é igual a 2 caes
+em vez disso, usamos uma tecnica one-hot-encoding (OHE)
+criamos 3 novas features
+cao gato peixe
+1   0      0
+0   1      0
+0   0      1
+
+1.4 como trabalhamos com o one hot encoding em escala?
+se tivemos um zoologico inteiro de animais resultaria em dados amplos
+o spark usa vetores esparsos para isso
+DenseVector(0,0,0,7,0,2,0,0,0)
+SparseVector(10,[3,5], [7,2])
+(numero de elementos, [indices de elementos diferentes de zerrto], [valores de elementos diferentes de zero])
+
+
+1.5 o que é o mlflow?
+é uma plataforma de codigo aberto para ciclo de vida de machine learning
+ele faz a operação de machine learning, foi desenvolvido pelo databricks
+
+1.6 quais as vantagens do mlflow
+conseguimos criar um novo projeto (chamado de experimento)
+criamos varios modelos, podemos fazer comparação de modelos
+geramos graficos, comparacao de graficos
+registrar um modelo que vai para produção 
+
+1.7 quais os principais problemas de machine learning?
+acompanhamento de experimento ou desenvolvimento de modelos
+reproduzir codigo, para trabalhar a reprodutibilidade do modelo
+comparar modelos
+padronizacao de empacotamento e implatacao de modelos (uso de bibliotecas)
+
+1.8 qual a estrutura do mlflow?
+projects - empacotamento dos modelos para execucoes reproduziveis em qualquer plataforma (ML framework)
+models - formato generico do modelo que padroniza opcoes de implatacao (deploy) (o enviroment que executamos, feature store atrelada, input de entrada, schema)
+tracking - gravar e consultar experimentos: codigo, metricas, parametros, artefatos, modelos (visualizacao dos modelos)
+model registry - gerenciamento centralizado e colaborativo do ciclo de vida do modelo (registramos ele, e conseguimos acompanhar o que esta em producao e o que esta staging )
+
+1.9 como funciona o tracking e autologging no mlflow?
+acompanha o desenvolvimento de ML com uma linha de codigo:
+parametros, metricas, linhagem de dados, modelo e ambiente
+mlflow.autolog(), gerando parametros e tags, incluindo a versao de dados, metricas, modelo, ambiente e artefatos
+
+1.10 qual é o ciclo de vida completo do ML?
+-data prep & featurization
+cientista de dados constroem features. Os engenheiro de dados fornecem infraestrutura para automatizar a featurization
+-data prep & featurization
+
+-model development & tracking Mlflow
+cientista de dados constroem modelos e os registram no MLflow,
+o qual guarda informacoes de ambiente
+-model development & tracking Mlflow
+
+-mlfow model registry
+cientista de dados movem modelos para staging ou production
+-mlfow model registry
+
+-mlflow model registry and deployment
+engenheiros de ML gerenciam ferramentas de CI/CD as quais promovem os modelos para Production
