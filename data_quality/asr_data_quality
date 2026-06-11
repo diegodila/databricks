@@ -1,0 +1,20 @@
+1.1 para que usamos expectations no delta?
+Use expectations to apply quality constraints that validate data as it flows through ETL pipelines
+
+1.2 o que o expectations no delta permite no fluxo do etl?
+Expectations provide greater insight into data quality metrics and allow you to fail updates or drop records when detecting invalid records.
+
+1.3 resuma os expectations no delta?
+aplicamos restricoes de qualidade que validam os dados
+
+1.4 resuma o que os expectations permitem no databricks no etl em si?
+eles permitem criar regras para update, ou dropar gravacoes de linhas que nao sigam as regras, e ate para um fluxo de etl quando nao sigam as regras
+
+1.5 qual a sintaxe do delta expectations, o que ele aceita?
+Expectations use standard SQL Boolean statements to specify constraints
+
+1.6 é possivel dar um nome uma expectation e reutilizar ela, monitorar e trackear ela?
+Each expectation must have a name, which is used as an identifier to track and monitor the expectation
+
+
+1.
