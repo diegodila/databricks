@@ -1,0 +1,17 @@
+1.1 o que é slowly changing dimension?
+é uma convenção ou uma tecnica para atualização que ocorre na tabela dimensão, essa atualização pode ter varios tipos de gravação
+
+1.2 o que é uma surrogate key?
+sao chaves primarias criadas artificialmente dentro de uma dimensao, um data warehouse, esse id é utilizado para a tabela fato
+
+1.3 o que faz o tipo 1 do slowly changing dimension?
+ele nao tem retem informação, ele sobrescreve em cima do passado, atualiza o registro
+
+1.4 o que faz o tipo 2 do slowly changing dimension?
+ele coloca uma linha adicional a dimensao, trazendo uma nova atualização ao registro
+
+1.5 o que faz o tipo 3 do slowly changing dimension?
+ele coloca uma coluna adicional, com data de vigencia daquela atualizacao, eu duplico apenas os atributos que quero utilizar
+
+1.6 o que faz o tipo 4 do slowly changing dimension?
+ele é uma variacao do tipo, criando uma linha so que em uma tabela historica, temos a online e tabela historica

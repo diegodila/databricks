@@ -8,7 +8,7 @@ Expectations provide greater insight into data quality metrics and allow you to 
 aplicamos restricoes de qualidade que validam os dados
 
 1.4 resuma o que os expectations permitem no databricks no etl em si?
-eles permitem criar regras para update, ou dropar gravacoes de linhas que nao sigam as regras, e ate para um fluxo de etl quando nao sigam as regras
+eles permitem criar regras para update, ou dropar gravacoes de linhas que nao sigam as regras, e ate parar um fluxo de etl quando nao sigam as regras
 
 1.5 qual a sintaxe do delta expectations, o que ele aceita?
 Expectations use standard SQL Boolean statements to specify constraints
@@ -16,5 +16,11 @@ Expectations use standard SQL Boolean statements to specify constraints
 1.6 é possivel dar um nome uma expectation e reutilizar ela, monitorar e trackear ela?
 Each expectation must have a name, which is used as an identifier to track and monitor the expectation
 
+1.7 como as expectations trabalham linha a linha? 
+The constraint clause is a SQL conditional statement that must evaluate to true or false for each record
 
-1.
+1.8 qual é o padrao quando temos uma invalid record?
+the default is warn and invalid records are written to the target, Use the expect operator when you want to keep records that violate the expectation but collect metrics on how many records pass or fail a constraint
+
+1.9 quais sao as boas praticas de expectations em um pipeline no databricks?
+Store expectation definitions separately from pipeline logic. Easily apply expectations to multiple datasets or pipelines. Update, audit, and maintain expectations without modifying pipeline source code.
