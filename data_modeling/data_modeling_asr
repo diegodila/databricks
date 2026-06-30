@@ -15,3 +15,6 @@ ele coloca uma coluna adicional, com data de vigencia daquela atualizacao, eu du
 
 1.6 o que faz o tipo 4 do slowly changing dimension?
 ele é uma variacao do tipo, criando uma linha so que em uma tabela historica, temos a online e tabela historica
+
+1.7 quando eu tenho ganho usando a tecnica scd 4?
+dimensao tem alta frequencia de mudança ou maioria da queries, A maioria das queries quer o estado atual, Volume é muito grande
