@@ -13,7 +13,7 @@ eles permitem criar regras para update, ou dropar gravacoes de linhas que nao si
 1.5 qual a sintaxe do delta expectations, o que ele aceita?
 Expectations use standard SQL Boolean statements to specify constraints
 
-1.6 é possivel dar um nome uma expectation e reutilizar ela, monitorar e trackear ela?
+1.6 é possivel dar um nome a uma expectation e reutilizar ela, monitorar e trackear ela?
 Each expectation must have a name, which is used as an identifier to track and monitor the expectation
 
 1.7 como as expectations trabalham linha a linha? 
@@ -24,3 +24,6 @@ the default is warn and invalid records are written to the target, Use the expec
 
 1.9 quais sao as boas praticas de expectations em um pipeline no databricks?
 Store expectation definitions separately from pipeline logic. Easily apply expectations to multiple datasets or pipelines. Update, audit, and maintain expectations without modifying pipeline source code.
+
+1.10 resuma as boas praticas para construir uma constraint no pipeline do databricks?
+armazenar separadamente as expectations da logica do pipeline, adicionar tags para criar grupos relacionados de expectations, e aplicar as constraints entre os conjunto de dados similares. Criamos uma modulo python com os dicionarios com o nome da expectation a constraint e as tags, podemos chamar esse modulo para ser reutilizado sempre que quisermos.

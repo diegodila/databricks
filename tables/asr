@@ -1,0 +1,14 @@
+1.1 quais os principais tipos de tabela que o databricks oferece suporte?
+managed, external, and foreign
+
+1.2 quais os 2 formatos de armazenamento aberto o databricks oferece?
+delta lake, apache iceberg
+
+1.3 qual o default table type que é criado de tabela?
+Unity Catalog managed table
+
+1.4 uma managed table é armazenado como?
+metadata registered in Unity Catalog and data Stored in cloud storage.
+
+1.5 o que defini um storage formats?
+Storage formats define how data is physically structured and tracked in object storage.

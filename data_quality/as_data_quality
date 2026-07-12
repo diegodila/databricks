@@ -1,0 +1,28 @@
+1.1 para que usamos expectations no delta?
+
+
+1.2 o que o expectations no delta permite no fluxo do etl?
+
+
+1.3 resuma os expectations no delta?
+
+
+1.4 resuma o que os expectations permitem no databricks no etl em si?
+
+
+1.5 qual a sintaxe do delta expectations, o que ele aceita?
+
+
+1.6 é possivel dar um nome a uma expectation e reutilizar ela, monitorar e trackear ela?
+
+
+1.7 como as expectations trabalham linha a linha? 
+
+
+1.8 qual é o padrao quando temos uma invalid record?
+
+
+1.9 quais sao as boas praticas de expectations em um pipeline no databricks?
+
+
+1.10 resuma as boas praticas para construir uma constraint no pipeline do databricks?
