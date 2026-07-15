@@ -110,7 +110,7 @@ working with incremental data involves cdc and many insert, update and delete fe
 - support for diverse workloads 
 - end-to-end streaming
 
-01.1 qual o metodo unificado de governança do databricks?
+1.1 qual o metodo unificado de governança do databricks?
 unity catalog
 
 1.2 o que é o unity catalog oferece?
@@ -295,7 +295,17 @@ LIST "<VOL-PATH>
 in delta shares received
 
 3.05 como fazemos uma query em um arquivo parquet que esta armazenado no volume?
-SELECT * FROM parquet."<VOL-PATH-directory-PARQUET> 
+SELECT * FROM parquet."<VOL-PATH-directory-PARQUET>
+
+4.01 quais sao as principais atribuicoes de um data warehouse?
+ele faz unificação de dados de fontes externas garantindo a integracao dos dados por exemplo como tipos de dados diferentes para a mesma informacao, como sexo M e sexo 1 (isso é integração) a 2 parte é etl e em 3 A construção de data marts que sao subconjunto de dados de um datawarehouse que pode ser definido tambem como assunto/area/departamento um data mart normalmente é modelado em esquema estrela (star schema). Por fim sao extraidos os relatorios e utilizacao de ferramentas de bussiness intelligence
+
+4.02 qual foi o problema do datawarehouse que fez surgir o datalake e o lakehouse?
+a volumetria de dados cresceu absurdamente, modelos de vendas online, modelos de market share onde contribuiram para se tornar maior a volumetria de dados e o datawarehouse tinha um problema com volumetrias grandes onde so era possivel se escalar verticalmente (servidores, memoria e hd) onde tem sua limitacoes parecidas com o problema que o hadoop resolve, por ex: se escalamos verticalmente, temos recursos que podem ficar ociosos em certos periodos, alem disso o datawarehouse trabalhava apenas com dados estruturados o  datalake trabalha com arquivos estruturados, semi estruturados ou nao estruturados outra questao uma das principais, é que datawarehouse eu tenho compute e storage na mesma camada onde eu nao consigo fazer varias escritas ao mesmo tempo por conta da memoria ficar escassa entao em um datawarehouse eu tenho o enfileiramento, em um datalake eu tenho paralelismo, quando vou colocar o dados para dentro do datalake eu posso utilizar n formas, eu posso fazer ingestao de varias formas paralelamente (rodando ao mesmo tempo)
+
+
+4.01 o que é um lakehouse?
+
 ---------------------------------------------------------------------------------------------------------------------------
 Implementação do databricks
 
