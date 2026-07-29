@@ -27,3 +27,12 @@ Store expectation definitions separately from pipeline logic. Easily apply expec
 
 1.10 resuma as boas praticas para construir uma constraint no pipeline do databricks?
 armazenar separadamente as expectations da logica do pipeline, adicionar tags para criar grupos relacionados de expectations, e aplicar as constraints entre os conjunto de dados similares. Criamos uma modulo python com os dicionarios com o nome da expectation a constraint e as tags, podemos chamar esse modulo para ser reutilizado sempre que quisermos.
+
+1.11 como garantir a qualidade de dados?
+Completude: campos obrigatórios preenchidos.
+Unicidade: ausência de duplicatas.
+Consistência: valores compatíveis entre sistemas.
+Validade: formatos corretos (CPF, e-mail, datas).
+Precisão: dados refletem a realidade.
+Atualidade (freshness): dados chegam dentro do SLA.
+Integridade referencial: relacionamentos válidos.
